@@ -31,7 +31,7 @@ Note: Our method is not only applicable to the Cascade Mask R-CNN but also can b
 ## Usage
 1. Prerequisites
     
-    Python 3.7.10 + CUDA 10.1 + Pytorch 1.1.0 + Torchvision 0.3.0 + MMCV 0.5.9
+    Python 3.7.10 + CUDA 10.0 + Pytorch 1.1.0 + Torchvision 0.3.0 + MMCV 0.5.9
 
 2.  Dataset
 
