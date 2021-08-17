@@ -1,5 +1,5 @@
 # Towards Real-World Prohibited Item Detection: A Large-Scale X-ray Benchmark(ICCV2021)
-This repository is the official implementation of SDANet and PIDray dataset. Paper link: https://arxiv.org/abs/.
+This repository is the official implementation of SDANet and PIDray dataset. Paper link: https://arxiv.org/abs/2108.07020.
 
 ## Overview
 Security inspection is a process of checking assets against set criteria and the evaluation of security systems and access controls to ensure safety, which is important to uncover any potential risks in various scenarios, such as public transportation and sensitive departments. In practice, the inspectors are required to monitor the scanned X-ray images acquired by the security inspection machine to uncover prohibited items, such as guns, ammunition, explosives, corrosive substances, toxic and radioactive substances. However, the inspectors struggle to localize prohibited items hidden in messy objects accurately and efficiently, which poses a great threat to safety.
