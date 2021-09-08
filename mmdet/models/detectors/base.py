@@ -148,69 +148,7 @@ class BaseDetector(nn.Module, metaclass=ABCMeta):
         else:
             return self.forward_test(img, img_metas, **kwargs)
 
-    def show_result(self, data, result, gt, dataset=None, score_thr=0.3):
-
-        if isinstance(result, tuple):
-            bbox_result, segm_result = result
-        else:
-            bbox_result, segm_result = result, None
-        if  data['img_metas'][0].data[0][0]['filename'].split('/')[-1] !='Lighter_backpack_2019_1_30_38.png' and data['img_metas'][0].data[0][0]['filename'].split('/')[-1] != 'Baton_handbag_2019_1_30_42.png' and data['img_metas'][0].data[0][0]['filename'].split('/')[-1] !=  'Bullet_backpack_2019_1_30_30.png' and data['img_metas'][0].data[0][0]['filename'].split('/')[-1] != 'Gun_backpack_2019_1_30_11.png' and data['img_metas'][0].data[0][0]['filename'].split('/')[-1] != 'Hammer_backpack_2019_1_30_73.png':
-            segm_result = None
-        else:
-            print('here',data['img_metas'][0].data[0][0]['filename'].split('/')[-1])
-        img_tensor = data['img'][0]
-        img_metas = data['img_metas'][0].data[0]
-        imgs = tensor2imgs(img_tensor, **img_metas[0]['img_norm_cfg'])
-        assert len(imgs) == len(img_metas)
-
-        if dataset is None:
-            class_names = self.CLASSES
-        elif isinstance(dataset, str):
-            class_names = get_classes(dataset)
-        elif isinstance(dataset, (list, tuple)):
-            class_names = dataset
-        else:
-            raise TypeError(
-                'dataset must be a valid dataset name or a sequence'
-                ' of class names, not {}'.format(type(dataset)))
-
-        for img, img_meta in zip(imgs, img_metas):
-            h, w, _ = img_meta['img_shape']
-            img_show = img[:h, :w, :]
-
-            bboxes = np.vstack(bbox_result)
-            # draw segmentation masks
-            if segm_result is not None:
-                segms = mmcv.concat_list(segm_result)
-                inds = np.where(bboxes[:, -1] > score_thr)[0]
-                for i in inds:
-#                    color_mask = np.random.randint(
-#                        0, 256, (1, 3), dtype=np.uint8)
-                    color_mask = np.array([[30,0,255]])
-                    mask = maskUtils.decode(segms[i]).astype(np.bool)
-                    img_show[mask] = img_show[mask] * 0.5 + color_mask * 0.5
-            # draw bounding boxes
-            labels = [
-                np.full(bbox.shape[0], i, dtype=np.int32)
-                for i, bbox in enumerate(bbox_result)
-            ]
-            overlaps = bbox_overlaps(torch.FloatTensor(gt['bboxes']),torch.FloatTensor(bboxes[:,0:4]))
-            
-            labels = np.concatenate(labels)
-            temp = torch.from_numpy(labels)
-            temp = temp[torch.nonzero(overlaps>0.5)[:,1]]
-            gt_labels = gt['labels']
-            final = torch.nonzero(temp== (gt_labels[0]-1))
-            if  data['img_metas'][0].data[0][0]['filename'].split('/')[-1] =='Lighter_backpack_2019_1_30_38.png' or data['img_metas'][0].data[0][0]['filename'].split('/')[-1] == 'Baton_handbag_2019_1_30_42.png' or data['img_metas'][0].data[0][0]['filename'].split('/')[-1] ==  'Bullet_backpack_2019_1_30_30.png' or data['img_metas'][0].data[0][0]['filename'].split('/')[-1] == 'Gun_backpack_2019_1_30_11.png' or data['img_metas'][0].data[0][0]['filename'].split('/')[-1] == 'Hammer_backpack_2019_1_30_73.png':
-                mmcv.imshow_det_bboxes(
-                    img_show,
-                    bboxes,
-                    labels,
-                    show=None,
-                    class_names=class_names,
-                    score_thr=score_thr,
-                    out_file = 'final_false/'+data['img_metas'][0].data[0][0]['filename'].split('/')[-1])
-    def show_result_old(self,
+    def show_result(self,
                     img,
                     result,
                     score_thr=0.3,
