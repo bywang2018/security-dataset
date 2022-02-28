@@ -58,13 +58,13 @@ Note: Our method is not only applicable to the Cascade Mask R-CNN but also can b
 ## Citation
 If you find this dataset useful for your research, please cite
 
-    @article{wang2021towards,
-      title={Towards Real-World Prohibited Item Detection: A Large-Scale X-ray Benchmark},
-      author={Wang, Boying and Zhang, Libo and Wen, Longyin and Liu, Xianglong and Wu, Yanjun},
-      journal={arXiv preprint arXiv:2108.07020},
-      year={2021}
-    }
-
+    @inproceedings{wang2021towards,
+       title={Towards Real-World Prohibited Item Detection: A Large-Scale X-ray Benchmark},
+       author={Wang, Boying and Zhang, Libo and Wen, Longyin and Liu, Xianglong and Wu, Yanjun},
+       booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+       pages={5412--5421},
+       year={2021}
+}
 ## License
 
 The images and the corresponding annotations in PIDray Dataset can be used ONLY for academic purposes, NOT for commercial purposes.
