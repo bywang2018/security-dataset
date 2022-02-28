@@ -64,7 +64,7 @@ If you find this dataset useful for your research, please cite
        booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
        pages={5412--5421},
        year={2021}
-}
+    }
 ## License
 
 The images and the corresponding annotations in PIDray Dataset can be used ONLY for academic purposes, NOT for commercial purposes.
